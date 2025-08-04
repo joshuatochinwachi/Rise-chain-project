@@ -45,3 +45,18 @@ SELECT
 FROM daily_metrics
 order by 1 desc;
 ```
+
+### 3. Block Production Metrics
+
+```
+SELECT 
+  DATE_TRUNC('hour', block_timestamp) as "hour",
+  COUNT(*) as "blocks produced",
+  AVG(tx_count) as "avg txs per block",
+  AVG(gas_used) as "avg gas used",
+  AVG(size) as "avg block size"
+FROM rise.testnet.fact_blocks
+WHERE block_timestamp >= '2025-03-04'
+GROUP BY 1
+ORDER BY 1;
+```
